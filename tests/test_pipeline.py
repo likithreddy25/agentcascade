@@ -57,9 +57,15 @@ def test_naive_and_exact_agree_on_flat_expression():
 
 def test_naive_diverges_on_nested_parens():
     naive, exact = NaiveTier(), ExactTier()
-    n = naive.solve_and_score("(3 + 4) * 2")
-    e = exact.solve_and_score("(3 + 4) * 2")
-    assert e.answer == 14.0
+    # "(3 + 4) * 2" is NOT a divergent case -- naive strips the parens and
+    # reads left to right (3+4=7, *2=14), which happens to match the
+    # correct grouping here too. "3 + (4 * 2)" is genuinely divergent:
+    # naive strips parens -> "3 + 4 * 2" -> left-to-right (3+4=7, *2=14),
+    # while exact respects the parens (4*2=8, 3+8=11).
+    n = naive.solve_and_score("3 + (4 * 2)")
+    e = exact.solve_and_score("3 + (4 * 2)")
+    assert e.answer == 11.0
+    assert n.answer == 14.0
     assert n.answer != e.answer  # naive strips the parens, gets this wrong
 
 
