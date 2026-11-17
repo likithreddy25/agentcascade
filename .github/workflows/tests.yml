@@ -15,5 +15,7 @@ jobs:
           cache: pip
       - name: Install dependencies
         run: pip install -r requirements.txt pytest
+      - name: Train the router (no API key needed)
+        run: python -m src.train_router
       - name: Run tests (no API calls)
         run: python -m pytest tests/ -v
