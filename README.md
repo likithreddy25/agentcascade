@@ -1,5 +1,7 @@
 # AgentCascade (practice build)
 
+![tests](https://github.com/likithreddy25/agentcascade/actions/workflows/tests.yml/badge.svg)
+
 A cost-aware task router, hand-built from scratch as a learning exercise,
 then extended with real Kafka streaming and a real paid LLM tier. This is
 the "build it yourself" companion to `~/Downloads/agentcascade`, the
